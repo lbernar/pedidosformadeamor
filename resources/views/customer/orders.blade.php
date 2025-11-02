@@ -50,10 +50,15 @@
                     <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 mt-4">
                         @foreach($order->items->take(6) as $item)
                         <div class="flex flex-col">
-                            <img src="{{ asset('storage/products/' . $item->product->featured_photo) }}" 
-                                 alt="{{ $item->product_name }}" 
-                                 class="w-full h-24 object-cover rounded"
-                                 onerror="this.src='https://via.placeholder.com/100'">
+                            @if($item->product && $item->product->featured_photo && file_exists(storage_path('app/public/products/' . $item->product->featured_photo)))
+                                <img src="{{ asset('storage/products/' . $item->product->featured_photo) }}" 
+                                     alt="{{ $item->product_name }}" 
+                                     class="w-full h-24 object-cover rounded">
+                            @else
+                                <div class="w-full h-24 bg-gray-200 rounded flex items-center justify-center">
+                                    <span class="text-gray-400 text-xs">No Image</span>
+                                </div>
+                            @endif
                             <p class="text-xs text-gray-600 mt-1 truncate">{{ $item->product_name }}</p>
                             <p class="text-xs text-gray-500">Qty: {{ $item->quantity }}</p>
                         </div>

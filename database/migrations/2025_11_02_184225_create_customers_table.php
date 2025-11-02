@@ -55,21 +55,6 @@ return new class extends Migration
             $table->index('email');
             $table->index('is_active');
         });
-
-        // Customer Messages (support tickets)
-        Schema::create('customer_messages', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
-            $table->foreignId('order_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('subject');
-            $table->text('message');
-            $table->text('order_details')->nullable();
-            $table->boolean('is_read')->default(false);
-            $table->timestamps();
-
-            $table->index('customer_id');
-            $table->index('is_read');
-        });
     }
 
     /**
@@ -77,7 +62,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customer_messages');
         Schema::dropIfExists('customers');
     }
 };
