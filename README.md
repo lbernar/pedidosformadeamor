@@ -23,6 +23,8 @@
 
 Modern e-commerce platform built with Laravel 12, migrated from legacy PHP codebase. Features secure authentication, product management, shopping cart, multiple payment gateways (PayPal, Stripe, PIX), and comprehensive admin panel.
 
+**🐳 Fully Dockerized** - Ready to run with a single command using Docker and Docker Compose. No need to install PHP, MySQL, or other dependencies locally.
+
 ### Why This Migration?
 
 The previous codebase had critical issues:
@@ -72,6 +74,11 @@ This Laravel migration provides:
 
 ## 📦 Requirements
 
+### Docker Setup (Recommended)
+- Docker Engine >= 20.10
+- Docker Compose >= 2.0
+
+### Manual Setup
 - PHP >= 8.3
 - Composer 2.x
 - MySQL >= 8.0 or MariaDB >= 10.5
@@ -102,8 +109,8 @@ The script will:
 - Clear cache
 
 **Access the application:**
-- Frontend: http://localhost:8000
-- Admin Panel: http://localhost:8000/admin
+- Frontend: http://localhost:8001
+- Admin Panel: http://localhost:8001/admin
 
 **Default Credentials:**
 - Customer: `customer@test.com` / `password`

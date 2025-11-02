@@ -115,10 +115,15 @@
             <div class="divide-y divide-gray-200">
                 @foreach($order->items as $item)
                 <div class="p-6 flex items-center">
-                    <img src="{{ asset('storage/products/' . $item->product->featured_photo) }}" 
-                         alt="{{ $item->product_name }}" 
-                         class="w-20 h-20 object-cover rounded"
-                         onerror="this.src='https://via.placeholder.com/80'">
+                    @if($item->product && $item->product->featured_photo && file_exists(storage_path('app/public/products/' . $item->product->featured_photo)))
+                        <img src="{{ asset('storage/products/' . $item->product->featured_photo) }}" 
+                             alt="{{ $item->product_name }}" 
+                             class="w-20 h-20 object-cover rounded">
+                    @else
+                        <div class="w-20 h-20 bg-gray-200 rounded flex items-center justify-center">
+                            <span class="text-gray-400 text-xs">No Image</span>
+                        </div>
+                    @endif
                     
                     <div class="ml-4 flex-1">
                         <h3 class="font-medium text-gray-900">

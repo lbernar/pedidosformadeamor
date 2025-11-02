@@ -179,10 +179,15 @@
                         <div class="space-y-4 mb-4 max-h-64 overflow-y-auto">
                             @foreach($cart as $item)
                             <div class="flex items-center">
-                                <img src="{{ asset('storage/products/' . $item['image']) }}" 
-                                     alt="{{ $item['name'] }}" 
-                                     class="w-16 h-16 object-cover rounded"
-                                     onerror="this.src='https://via.placeholder.com/64'">
+                                @if($item['image'] && file_exists(storage_path('app/public/products/' . $item['image'])))
+                                    <img src="{{ asset('storage/products/' . $item['image']) }}" 
+                                         alt="{{ $item['name'] }}" 
+                                         class="w-16 h-16 object-cover rounded">
+                                @else
+                                    <div class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center">
+                                        <span class="text-gray-400 text-xs">No Image</span>
+                                    </div>
+                                @endif
                                 <div class="ml-3 flex-1">
                                     <p class="text-sm font-medium text-gray-900">{{ $item['name'] }}</p>
                                     @if($item['size'] || $item['color'])

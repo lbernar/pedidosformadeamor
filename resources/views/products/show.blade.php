@@ -6,11 +6,16 @@
             <!-- Product Images -->
             <div>
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-4">
-                    <img id="mainImage" 
-                         src="{{ asset('storage/products/' . $product->featured_photo) }}" 
-                         alt="{{ $product->name }}" 
-                         class="w-full h-96 object-cover"
-                         onerror="this.src='https://via.placeholder.com/600x400?text=No+Image'">
+                    @if($product->featured_photo && file_exists(storage_path('app/public/products/' . $product->featured_photo)))
+                        <img id="mainImage" 
+                             src="{{ asset('storage/products/' . $product->featured_photo) }}" 
+                             alt="{{ $product->name }}" 
+                             class="w-full h-96 object-cover">
+                    @else
+                        <div class="w-full h-96 bg-gray-200 flex items-center justify-center">
+                            <span class="text-gray-400 text-2xl font-medium">No Image Available</span>
+                        </div>
+                    @endif
                 </div>
                 
                 @if($product->photos->count() > 0)

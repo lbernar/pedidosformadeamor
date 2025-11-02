@@ -49,19 +49,16 @@ class DatabaseSeeder extends Seeder
         // Create Categories
         $menCategory = Category::create([
             'name' => 'Men',
-            'slug' => 'men',
             'show_on_menu' => true,
         ]);
 
         $womenCategory = Category::create([
             'name' => 'Women',
-            'slug' => 'women',
             'show_on_menu' => true,
         ]);
 
         $kidsCategory = Category::create([
             'name' => 'Kids',
-            'slug' => 'kids',
             'show_on_menu' => true,
         ]);
 
@@ -70,25 +67,21 @@ class DatabaseSeeder extends Seeder
         // Create Mid Categories
         $menClothing = MidCategory::create([
             'name' => 'Clothing',
-            'slug' => 'men-clothing',
             'top_category_id' => $menCategory->id,
         ]);
 
         $menAccessories = MidCategory::create([
             'name' => 'Accessories',
-            'slug' => 'men-accessories',
             'top_category_id' => $menCategory->id,
         ]);
 
         $womenClothing = MidCategory::create([
             'name' => 'Clothing',
-            'slug' => 'women-clothing',
             'top_category_id' => $womenCategory->id,
         ]);
 
         $womenAccessories = MidCategory::create([
             'name' => 'Accessories',
-            'slug' => 'women-accessories',
             'top_category_id' => $womenCategory->id,
         ]);
 
@@ -97,25 +90,21 @@ class DatabaseSeeder extends Seeder
         // Create End Categories
         $menTshirts = EndCategory::create([
             'name' => 'T-Shirts',
-            'slug' => 'men-tshirts',
             'mid_category_id' => $menClothing->id,
         ]);
 
         $menJeans = EndCategory::create([
             'name' => 'Jeans',
-            'slug' => 'men-jeans',
             'mid_category_id' => $menClothing->id,
         ]);
 
         $womenDresses = EndCategory::create([
             'name' => 'Dresses',
-            'slug' => 'women-dresses',
             'mid_category_id' => $womenClothing->id,
         ]);
 
         $womenBags = EndCategory::create([
             'name' => 'Bags',
-            'slug' => 'women-bags',
             'mid_category_id' => $womenAccessories->id,
         ]);
 
@@ -125,7 +114,6 @@ class DatabaseSeeder extends Seeder
         $products = [
             [
                 'name' => 'Classic Black T-Shirt',
-                'slug' => 'classic-black-tshirt',
                 'current_price' => 49.90,
                 'old_price' => 79.90,
                 'qty' => 100,
@@ -138,7 +126,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Slim Fit Blue Jeans',
-                'slug' => 'slim-fit-blue-jeans',
                 'current_price' => 129.90,
                 'old_price' => 199.90,
                 'qty' => 50,
@@ -151,7 +138,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Summer Floral Dress',
-                'slug' => 'summer-floral-dress',
                 'current_price' => 159.90,
                 'qty' => 30,
                 'featured_photo' => 'product-3.jpg',
@@ -163,7 +149,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Leather Crossbody Bag',
-                'slug' => 'leather-crossbody-bag',
                 'current_price' => 249.90,
                 'old_price' => 349.90,
                 'qty' => 20,
@@ -176,7 +161,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'White Cotton T-Shirt',
-                'slug' => 'white-cotton-tshirt',
                 'current_price' => 39.90,
                 'qty' => 150,
                 'featured_photo' => 'product-5.jpg',
@@ -188,7 +172,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Ripped Black Jeans',
-                'slug' => 'ripped-black-jeans',
                 'current_price' => 149.90,
                 'qty' => 40,
                 'featured_photo' => 'product-6.jpg',
@@ -200,7 +183,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Evening Cocktail Dress',
-                'slug' => 'evening-cocktail-dress',
                 'current_price' => 299.90,
                 'old_price' => 449.90,
                 'qty' => 15,
@@ -213,7 +195,6 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Designer Tote Bag',
-                'slug' => 'designer-tote-bag',
                 'current_price' => 199.90,
                 'qty' => 25,
                 'featured_photo' => 'product-8.jpg',
@@ -308,14 +289,15 @@ class DatabaseSeeder extends Seeder
         Customer::create([
             'name' => 'Test Customer',
             'email' => 'customer@test.com',
-            'password' => 'password', // Will be hashed by mutator
+            'password' => bcrypt('password'),
             'phone' => '+55 11 98765-4321',
             'address' => 'Rua Teste, 123',
             'city' => 'São Paulo',
             'state' => 'SP',
             'zip_code' => '01234-567',
             'country' => 'Brazil',
-            'status' => 'active',
+            'is_active' => true,
+            'email_verified_at' => now(),
         ]);
 
         echo "✓ Test customer created (email: customer@test.com, password: password)\n";

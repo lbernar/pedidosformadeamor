@@ -25,10 +25,15 @@
                         @foreach($cart as $key => $item)
                             <div class="p-6 border-b border-gray-200">
                                 <div class="flex items-center">
-                                    <img src="{{ asset('storage/products/' . $item['image']) }}" 
-                                         alt="{{ $item['name'] }}" 
-                                         class="w-24 h-24 object-cover rounded"
-                                         onerror="this.src='https://via.placeholder.com/100'">
+                                    @if($item['image'] && file_exists(storage_path('app/public/products/' . $item['image'])))
+                                        <img src="{{ asset('storage/products/' . $item['image']) }}" 
+                                             alt="{{ $item['name'] }}" 
+                                             class="w-24 h-24 object-cover rounded">
+                                    @else
+                                        <div class="w-24 h-24 bg-gray-200 rounded flex items-center justify-center">
+                                            <span class="text-gray-400 text-xs">No Image</span>
+                                        </div>
+                                    @endif
                                     
                                     <div class="ml-6 flex-1">
                                         <h3 class="text-lg font-semibold text-gray-900">
